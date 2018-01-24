@@ -1,5 +1,5 @@
 
-% initialize function for AR simulation 
+% create function for AR simulation 
 function [Y] = AR_sim(alpha, rho,sig_sq,T,y0)
 
 % initialize vector 
@@ -12,8 +12,8 @@ for t=1:T;
     
     % put it into the vector of results
     Y = [Y;temp]
-    
+% end loop   
 end;
-
+% end function 
 end
 
