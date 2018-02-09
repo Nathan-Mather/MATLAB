@@ -35,16 +35,16 @@ lhs =y(4);
 rhs =(1-params(1))*params(11)+y(4)*params(1)+x(1);
 residual(1)= lhs-rhs;
 lhs =0;
-rhs =(-(1-y(4)))*y(1)+y(5);
+rhs =(-(1-y(4)))*params(15)*exp(y(1))+params(14)*exp(y(5));
 residual(2)= lhs-rhs;
 lhs =0;
-rhs =(-y(5))+1/(1+params(9))*(params(5)*(1+params(3))*y(3)^(params(5)-1)+y(5)*(1-params(10)));
+rhs =exp(y(5))*(-params(14))+1/(1+params(9))*(params(5)*(1-params(3))*(params(12)*exp(y(3)))^(params(5)-1)+params(14)*exp(y(5))*(1-params(10)));
 residual(3)= lhs-rhs;
-lhs =y(2);
-rhs =params(8)*y(1)^params(4);
+lhs =params(13)*exp(y(2));
+rhs =params(15)*params(8)*exp(y(1))^params(4);
 residual(4)= lhs-rhs;
-lhs =y(3);
-rhs =y(2)+y(3)*(1-params(10));
+lhs =params(12)*exp(y(3));
+rhs =params(13)*exp(y(2))+params(12)*exp(y(3))*(1-params(10));
 residual(5)= lhs-rhs;
 if ~isreal(residual)
   residual = real(residual)+imag(residual).^2;
@@ -57,15 +57,15 @@ if nargout >= 2,
   %
 
   g1(1,4)=1-params(1);
-  g1(2,1)=1-y(4);
-  g1(2,4)=(-y(1));
-  g1(2,5)=(-1);
-  g1(3,3)=(-(1/(1+params(9))*params(5)*(1+params(3))*getPowerDeriv(y(3),params(5)-1,1)));
-  g1(3,5)=(-((-1)+1/(1+params(9))*(1-params(10))));
-  g1(4,1)=(-(params(8)*getPowerDeriv(y(1),params(4),1)));
-  g1(4,2)=1;
-  g1(5,2)=(-1);
-  g1(5,3)=1-(1-params(10));
+  g1(2,1)=(-((-(1-y(4)))*params(15)*exp(y(1))));
+  g1(2,4)=(-(params(15)*exp(y(1))));
+  g1(2,5)=(-(params(14)*exp(y(5))));
+  g1(3,3)=(-(1/(1+params(9))*params(5)*(1-params(3))*params(12)*exp(y(3))*getPowerDeriv(params(12)*exp(y(3)),params(5)-1,1)));
+  g1(3,5)=(-(exp(y(5))*(-params(14))+1/(1+params(9))*params(14)*exp(y(5))*(1-params(10))));
+  g1(4,1)=(-(params(15)*params(8)*exp(y(1))*getPowerDeriv(exp(y(1)),params(4),1)));
+  g1(4,2)=params(13)*exp(y(2));
+  g1(5,2)=(-(params(13)*exp(y(2))));
+  g1(5,3)=params(12)*exp(y(3))-params(12)*exp(y(3))*(1-params(10));
   if ~isreal(g1)
     g1 = real(g1)+2*imag(g1);
   end

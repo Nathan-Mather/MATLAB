@@ -14,7 +14,7 @@ delta = (1/4)*delta_bar
 
 % calculate values 
 p = (delta/A)^((alpha-1)/(theta*(alpha-1)-1))*(((r+delta)*(1-itc))/alpha ...
-    *(1+t_k))^(1/(theta*(alpha-1)-1))
+    *(1-t_k))^(1/(theta*(alpha-1)-1))
 
 I = A*p
 

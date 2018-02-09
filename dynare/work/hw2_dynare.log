@@ -7,71 +7,36 @@ Computing static model derivatives:
 Computing dynamic model derivatives:
  - order 1
  - order 2
- - order 3
 Processing outputs ...
 done
 Preprocessing completed.
-
-STEADY-STATE RESULTS:
-
-P   		 1.51426
-I   		 1.51426
-K   		 30.2851
-itc 		 0
-q   		 1.51426
-
-EIGENVALUES:
-         Modulus             Real        Imaginary
-
-             0.9              0.9                0
-          0.9382           0.9382                0
-           1.077            1.077                0
-
-
-There are 1 eigenvalue(s) larger than 1 in modulus 
-for 1 forward-looking variable(s)
-
-The rank condition is verified.
-
-
-MODEL SUMMARY
-
-  Number of variables:         5
-  Number of stochastic shocks: 1
-  Number of state variables:   2
-  Number of jumpers:           1
-  Number of static variables:  2
-
-
-MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
-Variables        eps1
-eps1         0.250000
+[Warning: Some of the parameters have no value (K_ss, I_ss, q_ss, P_ss) when using steady. If these parameters are not initialized in a
+steadystate file or a steady_state_model-block, Dynare may not be able to solve the model...] 
 
 
 
-MOMENTS OF SIMULATED VARIABLES
-VARIABLE              MEAN       STD. DEV.        VARIANCE        SKEWNESS        KURTOSIS
-P                 2.763445        9.126268       83.288764        1.906465       28.881959
-I                 2.763445        9.126268       83.288764        1.906465       28.881959
-K                55.992538       48.368992     2339.559385        0.419731        2.693717
-itc               0.012944        1.152869        1.329107       -0.071971        0.029201
-q                 0.932273        0.483769        0.234033       -0.771799        3.329148
+
+Residuals of the static equations:
+
+Equation number 1 : NaN
+Equation number 2 : NaN
+Equation number 3 : NaN
+Equation number 4 : NaN
+Equation number 5 : NaN
 
 
-CORRELATION OF SIMULATED VARIABLES
-VARIABLE         P       I       K     itc       q
-P           1.0000  1.0000 -0.3214  0.7893 -0.5317
-I           1.0000  1.0000 -0.3214  0.7893 -0.5317
-K          -0.3214 -0.3214  1.0000 -0.1979 -0.6003
-itc         0.7893  0.7893 -0.1979  1.0000 -0.5973
-q          -0.5317 -0.5317 -0.6003 -0.5973  1.0000
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('print_info', 'c:\dynare\4.5.3\matlab\print_info.m', 90)" style="font-weight:bold">print_info</a> (<a href="matlab: opentoline('c:\dynare\4.5.3\matlab\print_info.m',90,0)">line 90</a>)
+The steady state contains NaN or Inf
 
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('steady', 'c:\dynare\4.5.3\matlab\steady.m', 104)" style="font-weight:bold">steady</a> (<a href="matlab: opentoline('c:\dynare\4.5.3\matlab\steady.m',104,0)">line 104</a>)
+    print_info(info,options_.noprint, options_);
 
-AUTOCORRELATION OF SIMULATED VARIABLES
-VARIABLE         1       2       3       4       5
-P           0.8137  0.6599  0.5418  0.4513  0.3882
-I           0.8137  0.6599  0.5418  0.4513  0.3882
-K           0.8852  0.7825  0.6953  0.6188  0.5579
-itc         0.9029  0.8101  0.7249  0.6455  0.5771
-q           0.9953  0.9840  0.9676  0.9475  0.9248
-Total computing time : 0h00m06s
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hw2_dynare', 'C:\Users\Nmath_000\Documents\MATLAB\dynare\work\hw2_dynare.m', 189)" style="font-weight:bold">hw2_dynare</a> (<a href="matlab: opentoline('C:\Users\Nmath_000\Documents\MATLAB\dynare\work\hw2_dynare.m',189,0)">line 189</a>)
+steady;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dynare', 'c:\dynare\4.5.3\matlab\dynare.m', 223)" style="font-weight:bold">dynare</a> (<a href="matlab: opentoline('c:\dynare\4.5.3\matlab\dynare.m',223,0)">line 223</a>)
+evalin('base',fname) ;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_hw2', 'C:\Users\Nmath_000\Documents\MATLAB\dynare\main_hw2.m', 67)" style="font-weight:bold">main_hw2</a> (<a href="matlab: opentoline('C:\Users\Nmath_000\Documents\MATLAB\dynare\main_hw2.m',67,0)">line 67</a>)
+     dynare hw2_dynare
+
