@@ -47,4 +47,5 @@ Temporary Items
 .apdisk
 
 # ignore working folders 
-dynare\work
+dynare/work
+dynare/work/html/run_hw3_q4_dynare.html
