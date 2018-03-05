@@ -47,4 +47,4 @@ Temporary Items
 .apdisk
 
 # ignore working folders 
-\work\
+dynare\work
