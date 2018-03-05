@@ -1,0 +1,405 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>run_hw_q3_dynare</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-03-05"><meta name="DC.source" content="run_hw_q3_dynare.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">set workind directory</a></li><li><a href="#3">calculate steady states for parms</a></li><li><a href="#4">Running Dynare simulations for different rho</a></li></ul></div><pre class="codeinput">clear <span class="string">all</span>; close <span class="string">all</span>;
+</pre><pre class="codeoutput">Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\private\evalmxdom.m' could not be
+cleared because it contains MATLAB code that is currently executing. 
+Warning: The file
+'C:\Users\Nmath_000\Documents\MATLAB\dynare\work\run_hw_q3_dynare.m' could not
+be cleared because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\mdbpublish.m' could not be cleared
+because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\publish.p' could not be cleared
+because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\private\evalmxdom.m' could not be
+cleared because it contains MATLAB code that is currently executing. 
+Warning: The file
+'C:\Users\Nmath_000\Documents\MATLAB\dynare\work\run_hw_q3_dynare.m' could not
+be cleared because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\mdbpublish.m' could not be cleared
+because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\publish.p' could not be cleared
+because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\private\evalmxdom.m' could not be
+cleared because it contains MATLAB code that is currently executing. 
+Warning: The file
+'C:\Users\Nmath_000\Documents\MATLAB\dynare\work\run_hw_q3_dynare.m' could not
+be cleared because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\mdbpublish.m' could not be cleared
+because it contains MATLAB code that is currently executing. 
+Warning: The file 'C:\Program
+Files\MATLAB\R2017b\toolbox\matlab\codetools\publish.p' could not be cleared
+because it contains MATLAB code that is currently executing. 
+</pre><h2 id="2">set workind directory</h2><pre class="codeinput">cd <span class="string">C:\Users\Nmath_000\Documents\MATLAB\dynare\work</span>
+</pre><h2 id="3">calculate steady states for parms</h2><pre class="codeinput">beta_i = .99
+dbar_i = .025
+alpha_i = .35
+neta_i = .5
+phi_i = .2886
+rho_i = .95
+sigmae_i = .01
+
+K_ss = (((1/beta_i) - (1-dbar_i))/alpha_i)^(1/(alpha_i - 1))
+I_ss = dbar_i*K_ss
+C_ss = K_ss^alpha_i - I_ss
+</pre><pre class="codeoutput">
+beta_i =
+
+    0.9900
+
+
+dbar_i =
+
+    0.0250
+
+
+alpha_i =
+
+    0.3500
+
+
+neta_i =
+
+    0.5000
+
+
+phi_i =
+
+    0.2886
+
+
+rho_i =
+
+    0.9500
+
+
+sigmae_i =
+
+    0.0100
+
+
+K_ss =
+
+   34.3982
+
+
+I_ss =
+
+    0.8600
+
+
+C_ss =
+
+    2.5898
+
+</pre><h2 id="4">Running Dynare simulations for different rho</h2><pre class="codeinput"><span class="comment">% run looop over rho</span>
+<span class="keyword">for</span> rho_i = [.95 .25]
+
+    dynare <span class="string">hw3_q3_dynare</span>
+
+    <span class="comment">% Create a PNG filename.</span>
+    fullFileName =  strcat(<span class="string">'C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw3_q3_ir_rho_'</span>, num2str(rho_i), <span class="string">'.png'</span>)
+
+
+	<span class="comment">% Then save it</span>
+	saveas(gcf, fullFileName)
+
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Using 64-bit preprocessor
+Starting Dynare (version 4.5.3).
+Starting preprocessing of the model file ...
+Found 6 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...
+done
+Preprocessing completed.
+
+
+STEADY-STATE RESULTS:
+
+c 		 -0.642747
+k 		 -1.63057
+i 		 -1.63057
+n 		 0.37616
+d 		 0
+y 		 -0.326196
+
+MODEL SUMMARY
+
+  Number of variables:         6
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  3
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables           e
+e            0.000100
+
+POLICY AND TRANSITION FUNCTIONS
+                                   c               k               i               n               d               y
+Constant                   -0.642747       -1.630573       -1.630568        0.376160               0       -0.326196
+k(-1)                       0.350000        0.350000        0.349998               0               0        0.350000
+d(-1)                      -0.015054       -0.894228        0.055772        0.006406        0.950000        0.004164
+e                          -0.015847       -0.941292        0.058707        0.006743        1.000000        0.004383
+
+
+THEORETICAL MOMENTS
+VARIABLE         MEAN  STD. DEV.   VARIANCE
+c             -0.6427     0.0164     0.0003
+k             -1.6306     0.0455     0.0021
+i             -1.6306     0.0142     0.0002
+n              0.3762     0.0002     0.0000
+d              0.0000     0.0320     0.0010
+y             -0.3262     0.0158     0.0002
+
+
+
+MATRIX OF CORRELATIONS
+Variables         c       k       i       n       d       y
+c            1.0000  0.9778  0.9985 -0.9469 -0.9469  0.9999
+k            0.9778  1.0000  0.9650 -0.9933 -0.9933  0.9750
+i            0.9985  0.9650  1.0000 -0.9281 -0.9281  0.9992
+n           -0.9469 -0.9933 -0.9281  1.0000  1.0000 -0.9426
+d           -0.9469 -0.9933 -0.9281  1.0000  1.0000 -0.9426
+y            0.9999  0.9750  0.9992 -0.9426 -0.9426  1.0000
+
+
+
+COEFFICIENTS OF AUTOCORRELATION
+Order         1       2       3       4       5
+c        0.9770  0.9377  0.8941  0.8505  0.8084
+k        0.9756  0.9358  0.8921  0.8486  0.8066
+i        0.9679  0.9258  0.8817  0.8384  0.7967
+n        0.9500  0.9025  0.8574  0.8145  0.7738
+d        0.9500  0.9025  0.8574  0.8145  0.7738
+y        0.9752  0.9352  0.8915  0.8480  0.8060
+Total computing time : 0h00m02s
+
+fullFileName =
+
+    'C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw3_q3_ir_rho_0.95.png'
+
+
+Configuring Dynare ...
+[mex] Generalized QZ.
+[mex] Sylvester equation solution.
+[mex] Kronecker products.
+[mex] Sparse kronecker products.
+[mex] Local state space iteration (second order).
+[mex] Bytecode evaluation.
+[mex] k-order perturbation solver.
+[mex] k-order solution simulation.
+[mex] Quasi Monte-Carlo sequence (Sobol).
+[mex] Markov Switching SBVAR.
+
+Using 64-bit preprocessor
+Starting Dynare (version 4.5.3).
+Starting preprocessing of the model file ...
+Found 6 equation(s).
+Evaluating expressions...done
+Computing static model derivatives:
+ - order 1
+Computing dynamic model derivatives:
+ - order 1
+Processing outputs ...
+done
+Preprocessing completed.
+
+
+STEADY-STATE RESULTS:
+
+c 		 -0.642747
+k 		 -1.63057
+i 		 -1.63057
+n 		 0.37616
+d 		 -3.46945e-18
+y 		 -0.326196
+
+MODEL SUMMARY
+
+  Number of variables:         6
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  3
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables           e
+e            0.000100
+
+POLICY AND TRANSITION FUNCTIONS
+                                   c               k               i               n               d               y
+Constant                   -0.642747       -1.630573       -1.630568        0.376160               0       -0.326196
+k(-1)                       0.350000        0.350000        0.349998               0               0        0.350000
+d(-1)                      -0.042230       -0.093548        0.156452        0.017970        0.250000        0.011681
+e                          -0.168921       -0.374190        0.625806        0.071881        1.000000        0.046723
+
+
+THEORETICAL MOMENTS
+VARIABLE         MEAN  STD. DEV.   VARIANCE
+c             -0.6427     0.0026     0.0000
+k             -1.6306     0.0045     0.0000
+i             -1.6306     0.0063     0.0000
+n              0.3762     0.0007     0.0000
+d             -0.0000     0.0103     0.0001
+y             -0.3262     0.0015     0.0000
+
+
+
+MATRIX OF CORRELATIONS
+Variables         c       k       i       n       d       y
+c            1.0000  0.9611 -0.6423 -0.8099 -0.8099  0.5260
+k            0.9611  1.0000 -0.8290 -0.9404 -0.9404  0.2707
+i           -0.6423 -0.8290  1.0000  0.9698  0.9698  0.3139
+n           -0.8099 -0.9404  0.9698  1.0000  1.0000  0.0729
+d           -0.8099 -0.9404  0.9698  1.0000  1.0000  0.0729
+y            0.5260  0.2707  0.3139  0.0729  0.0729  1.0000
+
+
+
+COEFFICIENTS OF AUTOCORRELATION
+Order         1       2       3       4       5
+c        0.7153  0.3417  0.1424  0.0556  0.0209
+k        0.5517  0.2435  0.0978  0.0374  0.0139
+i        0.0414 -0.0626 -0.0412 -0.0192 -0.0079
+n        0.2500  0.0625  0.0156  0.0039  0.0010
+d        0.2500  0.0625  0.0156  0.0039  0.0010
+y        0.2835  0.0826  0.0248  0.0076  0.0024
+Total computing time : 0h00m01s
+
+fullFileName =
+
+    'C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw3_q3_ir_rho_0.25.png'
+
+</pre><img vspace="5" hspace="5" src="run_hw_q3_dynare_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all; close all;
+
+%% set workind directory
+cd C:\Users\Nmath_000\Documents\MATLAB\dynare\work
+
+%% calculate steady states for parms 
+beta_i = .99
+dbar_i = .025
+alpha_i = .35
+neta_i = .5
+phi_i = .2886
+rho_i = .95
+sigmae_i = .01
+
+K_ss = (((1/beta_i) - (1-dbar_i))/alpha_i)^(1/(alpha_i - 1))
+I_ss = dbar_i*K_ss
+C_ss = K_ss^alpha_i - I_ss
+
+
+%% Running Dynare simulations for different rho 
+
+% run looop over rho 
+for rho_i = [.95 .25]
+
+    dynare hw3_q3_dynare
+    
+    % Create a PNG filename.
+    fullFileName =  strcat('C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw3_q3_ir_rho_', num2str(rho_i), '.png')
+	
+		
+	% Then save it
+	saveas(gcf, fullFileName)
+    
+end
+
+##### SOURCE END #####
+--></body></html>

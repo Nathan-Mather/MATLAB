@@ -25,7 +25,7 @@ for rho_i = [.95 .25]
     dynare hw3_q3_dynare
     
     % Create a PNG filename.
-    fullFileName =  strcat('C:\Users\Nmath_000\Documents\MATLAB\plots\hw3_q3_ir_rho_', num2str(rho_i), '.png')
+    fullFileName =  strcat('C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw3_q3_ir_rho_', num2str(rho_i), '.png')
 	
 		
 	% Then save it

@@ -1,0 +1,433 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>hw_3_q2</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-03-05"><meta name="DC.source" content="hw_3_q2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% create list of data sets</span>
+list = [<span class="string">"gdp_ch09_SA"</span>, <span class="string">"nondur_ch09_SA"</span>, <span class="string">"p_nres_inv_ch09_SA"</span>, <span class="string">"res_inv_ch09_SA"</span>];
+
+<span class="comment">% initialize a matrix to store variance data in</span>
+std_data = zeros(1,4);
+
+<span class="comment">% initialize matrx to store data. Use 76 rows because C and I data doesn't</span>
+<span class="comment">% go back further.</span>
+full_hp_data = zeros(76,4);
+
+<span class="comment">% loop over data sets</span>
+<span class="keyword">for</span> i = 1:4
+
+    <span class="comment">% grab charchter string</span>
+    str =  list(i);
+
+    <span class="comment">% load data</span>
+    dt = xlsread(strcat(<span class="string">"C:\Users\Nmath_000\Documents\MI_school\macro 607\data\"</span>, str, <span class="string">".xlsx"</span>));
+
+    <span class="comment">% log the data</span>
+    dt = log(dt);
+
+    <span class="comment">% create vector of row numbers</span>
+    row_num = transpose(1:1:length(dt));
+
+    <span class="comment">% add row numbers for plot</span>
+    dt = [dt row_num];
+
+    <span class="comment">% make the scatter plot of log data over time</span>
+    plot_1 = figure;
+    plot( dt(:,2), dt(:,1))
+    title( strcat(<span class="string">"Plot of log "</span>,str, <span class="string">" over time"</span>));
+
+    <span class="comment">% run data through hp filter</span>
+    hp_data = hp_filter(dt(:,1), 1600);
+
+    <span class="comment">% add row numbers for plot</span>
+    hp_data = [hp_data row_num];
+
+    <span class="comment">% make the scatter plot of log data over time</span>
+    plot_2 = figure;
+    plot( hp_data(:,2), hp_data(:,1))
+    title(strcat(<span class="string">"Plot of HP filtered log "</span>,regexprep(str,<span class="string">"_"</span>, <span class="string">" "</span>), <span class="string">" over time"</span>) );
+
+    <span class="comment">% save plots</span>
+    saveas(plot_1, strcat(<span class="string">"C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw_3_p1_"</span>,str, <span class="string">".png"</span>))
+    saveas(plot_2, strcat(<span class="string">"C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw_3_p2"</span>,str, <span class="string">".png"</span>))
+
+    <span class="comment">% store data NOTE: We have to take the last 76 observations of the data</span>
+    <span class="comment">% because real consumption and investment only goes back that far.</span>
+    full_hp_data(:, i) = hp_data(length(hp_data)-75:length(hp_data) , 1);
+
+    <span class="comment">% calculate variance of data</span>
+    std_data(1,i) = std(hp_data(:,1));
+
+<span class="keyword">end</span>
+
+<span class="comment">% print off standard deviation of data</span>
+<span class="string">"standard deviation of GDP, nondurable C, non_res I, res I"</span>
+<span class="string">"all observations are chained 2009"</span>
+std_data
+
+<span class="comment">% do correlations</span>
+
+    <span class="comment">% loop over c I columns to correlate with y</span>
+    <span class="keyword">for</span> i = 2:4
+
+        <span class="comment">% grab gdp column and ith column</span>
+        lag_data = full_hp_data(:,[1 i]);
+
+        <span class="comment">% loop 10 times to create backward lags, We could do more but the number of</span>
+        <span class="comment">% obervations drops off and so they stop being usefull</span>
+        <span class="keyword">for</span> t = 1:10
+
+            <span class="comment">% create vector of lagged data backwards</span>
+            lag_t_b = [NaN(t,1); lag_data(1:76-t, 2)];
+
+            <span class="comment">% fill in lagged data</span>
+            lag_data(:, t+2) = lag_t_b;
+
+        <span class="keyword">end</span>
+
+
+        <span class="comment">% loop 10 time to create forward lags</span>
+          <span class="keyword">for</span> t = 1:10
+
+            <span class="comment">% create vector of forward data</span>
+            lag_t_f = [lag_data(t+1:76, 2); NaN(t,1) ];
+
+            <span class="comment">% fill in lagged data</span>
+            lag_data(:, t+12) = lag_t_f;
+
+        <span class="keyword">end</span>
+
+
+        <span class="comment">% now get covariances for the lagged data</span>
+        lagged_correlations = corr(lag_data,<span class="string">'Rows'</span>,<span class="string">'pairwise'</span>);
+
+        <span class="comment">% grab relavent info</span>
+        lagged_correlations = lagged_correlations(:, 1);
+
+        <span class="comment">% grab charchter string</span>
+        str =  list(i);
+
+        <span class="comment">% print backwards lags</span>
+        strcat(<span class="string">"backward corr of GDP with "</span>,str)
+        lagged_correlations(2:11,1)
+
+        <span class="comment">% print forward lags</span>
+        strcat(<span class="string">"forward corr of GDP with "</span>,str)
+        lagged_correlations(12:21,1)
+
+
+    <span class="keyword">end</span>
+</pre><pre class="codeoutput">
+ans = 
+
+    "standard deviation of GDP, nondurable C, non_res I, res I"
+
+
+ans = 
+
+    "all observations are chained 2009"
+
+
+std_data =
+
+    0.0161    0.0103    0.0502    0.0809
+
+
+ans = 
+
+    "backward corr of GDP with nondur_ch09_SA"
+
+
+ans =
+
+    0.8347
+    0.7859
+    0.7014
+    0.5525
+    0.4000
+    0.2181
+    0.0840
+   -0.0893
+   -0.2605
+   -0.3647
+
+
+ans = 
+
+    "forward corr of GDP with nondur_ch09_SA"
+
+
+ans =
+
+   -0.4298
+    0.7347
+    0.6160
+    0.4479
+    0.2564
+    0.0789
+   -0.0797
+   -0.2147
+   -0.3079
+   -0.3125
+
+
+ans = 
+
+    "backward corr of GDP with p_nres_inv_ch09_SA"
+
+
+ans =
+
+    0.8351
+    0.6883
+    0.4673
+    0.2343
+    0.0306
+   -0.1418
+   -0.2650
+   -0.3487
+   -0.3900
+   -0.4066
+
+
+ans = 
+
+    "forward corr of GDP with p_nres_inv_ch09_SA"
+
+
+ans =
+
+   -0.4138
+    0.8885
+    0.8413
+    0.7356
+    0.5869
+    0.4015
+    0.2119
+    0.0475
+   -0.1031
+   -0.2413
+
+
+ans = 
+
+    "backward corr of GDP with res_inv_ch09_SA"
+
+
+ans =
+
+    0.6202
+    0.6804
+    0.6995
+    0.6892
+    0.6748
+    0.6182
+    0.5618
+    0.4856
+    0.3869
+    0.2731
+
+
+ans = 
+
+    "forward corr of GDP with res_inv_ch09_SA"
+
+
+ans =
+
+    0.1211
+    0.4969
+    0.3470
+    0.1894
+    0.0568
+   -0.0657
+   -0.1878
+   -0.2973
+   -0.4152
+   -0.5130
+
+</pre><img vspace="5" hspace="5" src="hw_3_q2_01.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_02.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_03.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_04.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_05.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_06.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_07.png" alt=""> <img vspace="5" hspace="5" src="hw_3_q2_08.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+% create list of data sets 
+list = ["gdp_ch09_SA", "nondur_ch09_SA", "p_nres_inv_ch09_SA", "res_inv_ch09_SA"];
+
+% initialize a matrix to store variance data in 
+std_data = zeros(1,4);
+
+% initialize matrx to store data. Use 76 rows because C and I data doesn't
+% go back further. 
+full_hp_data = zeros(76,4);
+
+% loop over data sets 
+for i = 1:4
+    
+    % grab charchter string 
+    str =  list(i);
+    
+    % load data
+    dt = xlsread(strcat("C:\Users\Nmath_000\Documents\MI_school\macro 607\data\", str, ".xlsx"));
+
+    % log the data 
+    dt = log(dt);
+
+    % create vector of row numbers 
+    row_num = transpose(1:1:length(dt));
+
+    % add row numbers for plot 
+    dt = [dt row_num];
+
+    % make the scatter plot of log data over time 
+    plot_1 = figure;
+    plot( dt(:,2), dt(:,1))
+    title( strcat("Plot of log ",str, " over time"));
+    
+    % run data through hp filter 
+    hp_data = hp_filter(dt(:,1), 1600);
+
+    % add row numbers for plot 
+    hp_data = [hp_data row_num];
+
+    % make the scatter plot of log data over time 
+    plot_2 = figure;
+    plot( hp_data(:,2), hp_data(:,1))
+    title(strcat("Plot of HP filtered log ",regexprep(str,"_", " "), " over time") );
+
+    % save plots 
+    saveas(plot_1, strcat("C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw_3_p1_",str, ".png"))
+    saveas(plot_2, strcat("C:\Users\Nmath_000\Documents\MATLAB\plots\hw3\hw_3_p2",str, ".png"))
+
+    % store data NOTE: We have to take the last 76 observations of the data
+    % because real consumption and investment only goes back that far. 
+    full_hp_data(:, i) = hp_data(length(hp_data)-75:length(hp_data) , 1);
+    
+    % calculate variance of data 
+    std_data(1,i) = std(hp_data(:,1));
+  
+end
+
+% print off standard deviation of data 
+"standard deviation of GDP, nondurable C, non_res I, res I"
+"all observations are chained 2009"
+std_data
+
+% do correlations 
+
+    % loop over c I columns to correlate with y 
+    for i = 2:4 
+               
+        % grab gdp column and ith column
+        lag_data = full_hp_data(:,[1 i]);
+        
+        % loop 10 times to create backward lags, We could do more but the number of
+        % obervations drops off and so they stop being usefull 
+        for t = 1:10
+           
+            % create vector of lagged data backwards 
+            lag_t_b = [NaN(t,1); lag_data(1:76-t, 2)];
+
+            % fill in lagged data 
+            lag_data(:, t+2) = lag_t_b;
+            
+        end
+        
+        
+        % loop 10 time to create forward lags 
+          for t = 1:10
+           
+            % create vector of forward data 
+            lag_t_f = [lag_data(t+1:76, 2); NaN(t,1) ];
+
+            % fill in lagged data 
+            lag_data(:, t+12) = lag_t_f;
+            
+        end
+                    
+    
+        % now get covariances for the lagged data 
+        lagged_correlations = corr(lag_data,'Rows','pairwise');
+        
+        % grab relavent info 
+        lagged_correlations = lagged_correlations(:, 1);
+        
+        % grab charchter string 
+        str =  list(i);
+        
+        % print backwards lags 
+        strcat("backward corr of GDP with ",str) 
+        lagged_correlations(2:11,1)
+        
+        % print forward lags 
+        strcat("forward corr of GDP with ",str) 
+        lagged_correlations(12:21,1)
+        
+        
+    end
+
+
+
+##### SOURCE END #####
+--></body></html>

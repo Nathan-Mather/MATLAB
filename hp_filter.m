@@ -25,7 +25,7 @@ function [smooth_data] = hp_filter(y,u)
     smooth_data = inv(A)*y;
     
     % now put it in deviations from the trend 
-    smooth_data = smooth_data - y
+    smooth_data = smooth_data - y;
 
 end
 
